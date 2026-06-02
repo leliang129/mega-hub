@@ -1,0 +1,19 @@
+# macOS / Windows
+.DS_Store
+Thumbs.db
+
+# Logs and temporary files
+*.log
+*.tmp
+*.swp
+*.swo
+
+# IDE settings
+.idea/
+.vscode/*
+!.vscode/settings.json
+
+# Local environment files
+.env
+.env.*
+!.env.example
