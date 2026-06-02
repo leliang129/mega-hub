@@ -45,6 +45,16 @@
             transition: transform 0.25s ease;
         }
         /* 搜索框聚焦动画 */
+        .search-container {
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .search-container:focus-within {
+            border-color: #18181b;
+            box-shadow:
+                0 0 0 1px #18181b,
+                0 12px 30px -4px rgba(24, 24, 27, 0.05),
+                0 4px 12px -2px rgba(24, 24, 27, 0.03);
+        }
         .search-input {
             transition: width 0.25s ease, border-color 0.15s ease, box-shadow 0.15s ease;
         }
@@ -77,42 +87,15 @@
 </head>
 <body class="text-zinc-800 bg-[#fafafa] antialiased tracking-tight flex flex-col overflow-hidden">
 
-    <!-- Header -->
-    <header class="w-full border-b border-zinc-200/80 bg-[#fafafa]/80 backdrop-blur-md h-14 shrink-0 px-4 md:px-6 flex items-center justify-between z-50">
-        <div class="flex items-center gap-2.5 font-bold text-zinc-900 text-sm">
-            <!-- 移动端菜单按钮 -->
-            <button id="menu-toggle" class="md:hidden w-8 h-8 flex items-center justify-center rounded-lg hover:bg-zinc-100 transition" aria-label="打开侧边导航">
-                <i data-lucide="menu" class="w-4 h-4"></i>
-            </button>
-            <svg viewBox="0 0 100 100" class="w-6 h-6">
-                <defs>
-                    <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#06b6d4"/>
-                        <stop offset="100%" stop-color="#10b981"/>
-                    </linearGradient>
-                </defs>
-                <rect width="100" height="100" rx="24" fill="url(#logo-grad)"/>
-                <path d="M30 50h40M50 30v40" stroke="white" stroke-width="10" stroke-linecap="round"/>
-            </svg>
-            <span class="hidden sm:inline">云端拾光</span>
-            <span class="sm:hidden">云端拾光</span>
-        </div>
-
-        <div class="flex items-center gap-3">
-            <div class="relative">
-                <label for="global-search" class="sr-only">全局搜索</label>
-                <span class="absolute inset-y-0 left-2.5 flex items-center text-zinc-400 pointer-events-none">
-                    <i data-lucide="search" class="w-3.5 h-3.5"></i>
-                </span>
-                <input id="global-search" type="text" placeholder="搜索... 按 / 唤醒" class="search-input w-40 sm:w-52 md:w-60 pl-8 pr-3 py-1.5 bg-white border border-zinc-200 rounded-lg text-xs focus:outline-none focus:border-zinc-900 md:focus:w-80" aria-label="全局搜索导航卡片">
-            </div>
-        </div>
-    </header>
-
     <div class="flex-1 flex min-h-0 w-full relative">
 
         <!-- 移动端遮罩层 -->
         <div id="sidebar-overlay" class="sidebar-overlay fixed inset-0 bg-black/30 z-40 md:hidden hidden opacity-0" aria-hidden="true"></div>
+
+        <!-- 移动端菜单按钮 -->
+        <button id="menu-toggle" class="md:hidden fixed top-4 left-4 z-50 w-10 h-10 flex items-center justify-center rounded-xl bg-white border border-zinc-200 shadow-sm hover:bg-zinc-50 transition" aria-label="打开侧边导航">
+            <i data-lucide="menu" class="w-5 h-5 text-zinc-600"></i>
+        </button>
 
         <!-- 侧边栏 -->
         <aside id="sidebar" class="sidebar-mobile fixed md:static inset-y-0 left-0 w-56 md:w-48 shrink-0 bg-white border-r border-zinc-200/60 p-4 overflow-y-auto z-50 -translate-x-full md:translate-x-0">
@@ -123,8 +106,75 @@
         </aside>
 
         <!-- 主内容区 -->
-        <main id="main-content" class="flex-1 min-w-0 p-4 md:p-6 overflow-y-auto smooth-scroll space-y-8 bg-[#fafafa]">
-            <!-- 动态生成 -->
+        <main id="main-content" class="flex-1 min-w-0 p-4 md:p-8 overflow-y-auto smooth-scroll bg-[#fafafa]">
+            <!-- 标题和搜索框 -->
+            <div class="w-full border-b border-zinc-200/60 pb-5 mb-6">
+                <div class="flex items-center justify-between gap-4">
+                    <div class="flex items-center gap-3 select-none shrink-0">
+                        <div class="w-9 h-9 bg-emerald-500 rounded-xl flex items-center justify-center text-white shadow-[0_3px_10px_rgba(16,185,129,0.2)]">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                        </div>
+                        <div>
+                            <h1 class="text-lg font-black tracking-tight text-zinc-900 leading-none">云端拾光</h1>
+                            <p class="text-[10px] text-zinc-400 font-medium tracking-wide mt-1">全域高频直达控制台</p>
+                        </div>
+                    </div>
+                    <div class="w-[420px] lg:w-[500px] shrink-0 hidden sm:block">
+                        <div class="search-container relative w-full flex items-center bg-white border border-zinc-200 rounded-xl pl-1 pr-1.5 py-1.5 shadow-[0_2px_6px_rgba(0,0,0,0.015)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] focus-within:border-zinc-900 focus-within:shadow-[0_12px_24px_-4px_rgba(24,24,27,0.04),0_4px_12px_-2px_rgba(24,24,27,0.02)] focus-within:ring-1 focus-within:ring-zinc-900">
+                            <div class="relative flex items-center shrink-0 z-10">
+                                <button id="engine-selector" class="flex items-center gap-1.5 pl-3 pr-2 py-1 text-xs font-semibold text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50 rounded-lg transition select-none">
+                                    <span id="current-engine">Bing</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-zinc-400"><path d="m6 9 6 6 6-6"/></svg>
+                                </button>
+                                <div id="engine-dropdown" class="absolute left-1 top-9 w-32 bg-white border border-zinc-200/80 rounded-xl shadow-xl shadow-black/[0.04] p-1 space-y-0.5 hidden text-xs font-medium">
+                                    <button class="w-full text-left px-2.5 py-1.5 hover:bg-zinc-50 rounded-lg text-zinc-800" onclick="changeEngine('Bing')">Bing 搜索</button>
+                                    <button class="w-full text-left px-2.5 py-1.5 hover:bg-zinc-50 rounded-lg text-zinc-800" onclick="changeEngine('Google')">Google</button>
+                                    <button class="w-full text-left px-2.5 py-1.5 hover:bg-zinc-50 rounded-lg text-zinc-800" onclick="changeEngine('百度')">百度</button>
+                                    <button class="w-full text-left px-2.5 py-1.5 hover:bg-zinc-50 rounded-lg text-zinc-800" onclick="changeEngine('GitHub')">GitHub</button>
+                                </div>
+                            </div>
+                            <div class="h-4 w-[1px] bg-zinc-200 mx-1.5"></div>
+                            <div class="relative flex-1 flex items-center">
+                                <label for="global-search" class="sr-only">全局搜索</label>
+                                <input id="global-search" type="text" placeholder="键入关键词，检索或直接搜索... (按 /)" class="w-full bg-transparent border-none pl-1 pr-12 py-0.5 text-xs font-normal text-zinc-800 placeholder-zinc-400/70 focus:outline-none focus:ring-0" aria-label="全局搜索">
+                                <kbd class="absolute right-3 my-auto h-5 px-1.5 bg-zinc-50 border border-zinc-200 rounded text-[9px] font-mono text-zinc-400 flex items-center justify-center pointer-events-none shadow-sm shadow-black/[0.01]">/</kbd>
+                            </div>
+                            <button id="search-action-btn" class="w-7 h-7 flex items-center justify-center bg-zinc-50 hover:bg-zinc-950 text-zinc-400 hover:text-white rounded-lg transition-all duration-150 active:scale-95 shadow-[0_1px_2px_rgba(0,0,0,0.05),0_0_0_1px_rgba(24,24,27,0.02)] cursor-pointer" aria-label="执行搜索">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full sm:hidden mt-4">
+                    <div class="search-container relative w-full flex items-center bg-white border border-zinc-200 rounded-xl pl-1 pr-1.5 py-1.5 shadow-[0_2px_6px_rgba(0,0,0,0.015)] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] focus-within:border-zinc-900 focus-within:shadow-[0_12px_24px_-4px_rgba(24,24,27,0.04),0_4px_12px_-2px_rgba(24,24,27,0.02)] focus-within:ring-1 focus-within:ring-zinc-900">
+                        <div class="relative flex items-center shrink-0 z-10">
+                            <button id="engine-selector-mobile" class="flex items-center gap-1.5 pl-3 pr-2 py-1 text-xs font-semibold text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50 rounded-lg transition select-none">
+                                <span id="current-engine-mobile">Bing</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-zinc-400"><path d="m6 9 6 6 6-6"/></svg>
+                            </button>
+                            <div id="engine-dropdown-mobile" class="absolute left-1 top-9 w-32 bg-white border border-zinc-200/80 rounded-xl shadow-xl shadow-black/[0.04] p-1 space-y-0.5 hidden text-xs font-medium">
+                                <button class="w-full text-left px-2.5 py-1.5 hover:bg-zinc-50 rounded-lg text-zinc-800" onclick="changeEngine('Bing', 'mobile')">Bing 搜索</button>
+                                <button class="w-full text-left px-2.5 py-1.5 hover:bg-zinc-50 rounded-lg text-zinc-800" onclick="changeEngine('Google', 'mobile')">Google</button>
+                                <button class="w-full text-left px-2.5 py-1.5 hover:bg-zinc-50 rounded-lg text-zinc-800" onclick="changeEngine('百度', 'mobile')">百度</button>
+                                <button class="w-full text-left px-2.5 py-1.5 hover:bg-zinc-50 rounded-lg text-zinc-800" onclick="changeEngine('GitHub', 'mobile')">GitHub</button>
+                            </div>
+                        </div>
+                        <div class="h-4 w-[1px] bg-zinc-200 mx-1.5"></div>
+                        <div class="relative flex-1 flex items-center">
+                            <label for="global-search-mobile" class="sr-only">全局搜索</label>
+                            <input id="global-search-mobile" type="text" placeholder="键入关键词，检索或直接搜索... (按 /)" class="w-full bg-transparent border-none pl-1 pr-12 py-0.5 text-xs font-normal text-zinc-800 placeholder-zinc-400/70 focus:outline-none focus:ring-0" aria-label="全局搜索">
+                            <kbd class="absolute right-3 my-auto h-5 px-1.5 bg-zinc-50 border border-zinc-200 rounded text-[9px] font-mono text-zinc-400 flex items-center justify-center pointer-events-none shadow-sm shadow-black/[0.01]">/</kbd>
+                        </div>
+                        <button id="search-action-btn-mobile" class="w-7 h-7 flex items-center justify-center bg-zinc-50 hover:bg-zinc-950 text-zinc-400 hover:text-white rounded-lg transition-all duration-150 active:scale-95 shadow-[0_1px_2px_rgba(0,0,0,0.05),0_0_0_1px_rgba(24,24,27,0.02)] cursor-pointer" aria-label="执行搜索">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- 导航内容 -->
+            <div class="space-y-8">
+                <!-- 动态生成 -->
+            </div>
         </main>
     </div>
 
@@ -150,6 +200,30 @@
             pink: { bg: 'bg-pink-50', border: 'border-pink-100', text: 'text-pink-600', hover: 'hover:border-pink-300', hoverBg: 'group-hover:bg-pink-600', hoverBorder: 'group-hover:border-pink-600' },
             rose: { bg: 'bg-rose-50', border: 'border-rose-100', text: 'text-rose-600', hover: 'hover:border-rose-300', hoverBg: 'group-hover:bg-rose-600', hoverBorder: 'group-hover:border-rose-600' }
         };
+
+        // 搜索引擎配置
+        const searchEngines = {
+            'Bing': 'https://cn.bing.com/search?q=',
+            'Google': 'https://www.google.com/search?q=',
+            '百度': 'https://www.baidu.com/s?wd=',
+            'GitHub': 'https://github.com/search?q='
+        };
+
+        // 切换搜索引擎
+        function changeEngine(name) {
+            document.getElementById('current-engine').innerText = name;
+            document.getElementById('engine-dropdown').classList.add('hidden');
+            document.getElementById('global-search').focus();
+        }
+
+        // 执行搜索
+        function executeSearch() {
+            const query = document.getElementById('global-search').value.trim();
+            if (!query) return;
+            const engine = document.getElementById('current-engine').innerText;
+            const searchUrl = searchEngines[engine] + encodeURIComponent(query);
+            if (searchUrl) window.open(searchUrl, '_blank');
+        }
 
         // 生成侧边栏导航项
         function renderSidebarNav(categories) {
@@ -234,15 +308,15 @@
                 renderSidebarNav(config.categories);
 
                 // 渲染主内容区
-                const mainContent = document.getElementById('main-content');
+                const navContainer = document.querySelector('.space-y-8');
                 config.categories.forEach(cat => {
-                    mainContent.appendChild(renderCategorySection(cat));
+                    navContainer.appendChild(renderCategorySection(cat));
                 });
 
                 // 底部留白
                 const spacer = document.createElement('div');
                 spacer.className = 'h-8';
-                mainContent.appendChild(spacer);
+                navContainer.appendChild(spacer);
 
                 // 初始化图标
                 lucide.createIcons();
@@ -326,10 +400,38 @@
                 });
             });
 
-            // 搜索过滤功能
+            // 搜索引擎选择器
+            const selectorBtn = document.getElementById('engine-selector');
+            const dropdownMenu = document.getElementById('engine-dropdown');
             const searchInput = document.getElementById('global-search');
+            const searchActionBtn = document.getElementById('search-action-btn');
             const allCards = document.querySelectorAll('a[href^="http"]');
 
+            // 下拉菜单打开/关闭
+            if (selectorBtn) {
+                selectorBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    dropdownMenu.classList.toggle('hidden');
+                });
+            }
+            document.addEventListener('click', () => {
+                if (dropdownMenu) dropdownMenu.classList.add('hidden');
+            });
+
+            // 搜索按钮点击
+            if (searchActionBtn) {
+                searchActionBtn.addEventListener('click', executeSearch);
+            }
+
+            // 移动端搜索按钮
+            const mobileSearchBtn = document.getElementById('mobile-search-btn');
+            if (mobileSearchBtn) {
+                mobileSearchBtn.addEventListener('click', () => {
+                    searchInput.focus();
+                });
+            }
+
+            // 搜索过滤功能
             searchInput.addEventListener('input', (e) => {
                 const query = e.target.value.toLowerCase().trim();
 
@@ -351,6 +453,9 @@
                     searchInput.blur();
                     searchInput.value = '';
                     allCards.forEach(card => card.style.display = '');
+                }
+                if (e.key === 'Enter' && document.activeElement === searchInput) {
+                    executeSearch();
                 }
             });
         }
