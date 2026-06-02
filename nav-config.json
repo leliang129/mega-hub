@@ -1,0 +1,611 @@
+{
+  "meta": {
+    "title": "MEGA HUB",
+    "subtitle": "全屏全域控制台",
+    "version": "1.0.0"
+  },
+  "categories": [
+    {
+      "id": "common",
+      "name": "常用高频",
+      "nameEn": "MOST USED",
+      "icon": "zap",
+      "iconClass": "text-amber-500",
+      "hoverBorder": "hover:border-zinc-400",
+      "items": [
+        {
+          "title": "GitHub",
+          "url": "https://github.com",
+          "description": "开源代码及协同平台",
+          "svg": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z'/></svg>",
+          "color": "zinc"
+        },
+        {
+          "title": "Notion",
+          "url": "https://notion.so",
+          "description": "非线性全能知识库空间",
+          "initial": "N",
+          "initialBg": "bg-zinc-900",
+          "initialText": "text-white"
+        },
+        {
+          "title": "Cloudflare",
+          "url": "https://www.cloudflare.com/",
+          "description": "网络性能与安全平台",
+          "svg": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M16.5088 16.8447c.1475-.502.125-.9736-.0664-1.334-.1836-.3477-.5059-.5723-.8965-.6299l-9.668-.2754c-.0527-.002-.0967-.0176-.1357-.043-.0352-.0273-.0625-.0683-.0781-.1172-.0313-.0977.0117-.1914.0937-.2383.0918-.0527.2002-.0527.2852-.0195l9.5957.375c.7754.0352 1.5527.4609 1.9648 1.1465.2031.334.2969.7148.25 1.1172l.6953.0137zm2.2852-2.7988c-.0703-.0586-.1543-.0879-.2383-.0879l-11.5781-.332c-.127-.0039-.2305-.082-.2813-.1914-.0527-.1113-.0352-.2402.0469-.334.0645-.0742.1621-.1191.2656-.123l11.5078-.2149c.2383-.0098.4941.082.6777.2754.1836.1934.2773.459.2461.7285l-.6465-.0205zm-3.3984 2.7441c-.0664-.0508-.1465-.0742-.2266-.0742l-8.0684-.2324c-.1191-.0059-.2187-.0742-.2715-.1777-.0508-.0996-.0352-.2227.043-.3125.0625-.0742.1543-.1172.252-.123l8.1621.0937c.248.0078.4824.1055.6562.2969.1758.1914.2637.4434.2324.7148l-.7793-.2856zm1.9453-2.7363l.5781.0176c.4766.0176.9629-.1367 1.3281-.4531.3555-.3066.5723-.7461.5762-1.2656l.0703-3.9024c.002-.1309-.0313-.2617-.0977-.377-.0645-.1113-.1621-.1973-.2773-.248l-8.9668-.3086c-.123-.0059-.2441-.0293-.3574-.0684-.1055-.0352-.1992-.0937-.2734-.1719-.1445-.1602-.209-.3672-.168-.5684.0371-.1895.1562-.3516.3164-.4492.164-.1016.3613-.1309.5527-.0898l9.1992.3359c.7734.0313 1.5664.4531 1.998 1.1348.2109.334.3066.7148.2598 1.1172l-.7812 4.5371-.1152.6543z'/></svg>",
+          "color": "orange"
+        },
+        {
+          "title": "ChatGPT",
+          "url": "https://chatgpt.com/",
+          "description": "OpenAI 交互终端",
+          "icon": "bot",
+          "color": "emerald"
+        },
+        {
+          "title": "阿里源",
+          "url": "https://mirrors.aliyun.com/",
+          "description": "阿里云开源镜像站",
+          "icon": "cloud",
+          "color": "orange"
+        },
+        {
+          "title": "渡渡鸟镜像",
+          "url": "https://docker.aityp.com/",
+          "description": "国内 Docker 镜像同步",
+          "icon": "cloud",
+          "color": "rose"
+        }
+      ]
+    },
+    {
+      "id": "ai",
+      "name": "AI 工具",
+      "nameEn": "AI TOOLS",
+      "icon": "cpu",
+      "iconClass": "text-purple-500",
+      "hoverBorder": "hover:border-purple-300",
+      "items": [
+        {
+          "title": "ChatGPT",
+          "url": "https://chatgpt.com/",
+          "description": "OpenAI 交互终端",
+          "icon": "bot",
+          "color": "emerald"
+        },
+        {
+          "title": "Claude",
+          "url": "https://claude.ai",
+          "description": "Anthropic 智能助手",
+          "icon": "sparkles",
+          "color": "amber"
+        },
+        {
+          "title": "Google Gemini",
+          "url": "https://gemini.google.com/",
+          "description": "Google Gemini AI 入口",
+          "icon": "brain",
+          "color": "orange"
+        },
+        {
+          "title": "Cursor",
+          "url": "https://cursor.sh",
+          "description": "下一代 AI 代码编辑器",
+          "icon": "terminal",
+          "color": "cyan"
+        },
+        {
+          "title": "DeepSeek",
+          "url": "https://deepseek.com",
+          "description": "高性价比推理开源模型",
+          "icon": "cpu",
+          "color": "blue"
+        },
+        {
+          "title": "LOVART 设计",
+          "url": "https://www.lovart.ai/",
+          "description": "LOVART AI 设计平台",
+          "icon": "palette",
+          "color": "pink"
+        },
+        {
+          "title": "FastGPT",
+          "url": "https://fastgpt.io/zh",
+          "description": "开源知识库型对话平台",
+          "icon": "message-square",
+          "color": "sky"
+        },
+        {
+          "title": "n8n",
+          "url": "https://github.com/n8n-io/n8n",
+          "description": "开源工作流自动化平台",
+          "icon": "git-branch",
+          "color": "green"
+        },
+        {
+          "title": "Dify",
+          "url": "https://docs.dify.ai/zh-hans/introduction",
+          "description": "开源 LLM 应用开发平台",
+          "icon": "blocks",
+          "color": "indigo"
+        }
+      ]
+    },
+    {
+      "id": "ops-cloud-native",
+      "name": "容器编排",
+      "nameEn": "OPS & CLOUD",
+      "icon": "cloud",
+      "iconClass": "text-cyan-500",
+      "hoverBorder": "hover:border-cyan-300",
+      "items": [
+        {
+          "title": "Kubectl Cheat",
+          "url": "https://kubernetes.io/docs/reference/kubectl/cheatsheet/",
+          "description": "K8s 常用命令速查",
+          "icon": "terminal",
+          "color": "blue"
+        },
+        {
+          "title": "Prometheus",
+          "url": "https://prometheus.io",
+          "description": "监控与告警系统",
+          "icon": "activity",
+          "color": "red"
+        },
+        {
+          "title": "Grafana",
+          "url": "https://grafana.com/",
+          "description": "可观测性仪表盘",
+          "icon": "bar-chart-2",
+          "color": "amber"
+        },
+        {
+          "title": "VictoriaMetrics",
+          "url": "https://docs.victoriametrics.com/quick-start/",
+          "description": "高性能时序数据库",
+          "icon": "database",
+          "color": "cyan"
+        },
+        {
+          "title": "Elastic Stack",
+          "url": "https://www.elastic.co/docs/reference",
+          "description": "日志检索与分析平台",
+          "icon": "search",
+          "color": "green"
+        },
+        {
+          "title": "SkyWalking",
+          "url": "https://skywalking.apache.org/",
+          "description": "应用性能监控平台",
+          "icon": "eye",
+          "color": "violet"
+        },
+        {
+          "title": "GitLab Docs",
+          "url": "https://docs.gitlab.com/",
+          "description": "GitLab 官方文档",
+          "svg": "<svg viewBox='0 0 24 24' fill='currentColor'><path d='M22.65 14.39L12 22.13 1.35 14.39a.84.84 0 01-.3-.94l1.22-3.78 2.44-7.51A.42.42 0 014.82 2a.43.43 0 01.58 0 .42.42 0 01.11.18l2.44 7.49h8.1l2.44-7.51A.42.42 0 0118.6 2a.43.43 0 01.58 0 .42.42 0 01.11.18l2.44 7.51L23 13.45a.84.84 0 01-.35.94z'/></svg>",
+          "color": "orange"
+        },
+        {
+          "title": "Nginx Docs",
+          "url": "https://nginx.org/en/docs/",
+          "description": "Web 服务器参考",
+          "icon": "globe",
+          "color": "green"
+        },
+        {
+          "title": "Ansible Docs",
+          "url": "https://docs.ansible.com/",
+          "description": "自动化运维文档",
+          "icon": "settings",
+          "color": "red"
+        },
+        {
+          "title": "Jenkins Docs",
+          "url": "https://www.jenkins.io/doc/",
+          "description": "使用手册与参考",
+          "icon": "hard-drive",
+          "color": "red"
+        },
+        {
+          "title": "Artifact Hub",
+          "url": "https://artifacthub.io",
+          "description": "寻找 Helm Charts",
+          "icon": "package",
+          "color": "sky"
+        },
+        {
+          "title": "Docker Docs",
+          "url": "https://docs.docker.com/reference/",
+          "description": "Docker 官方参考",
+          "icon": "box",
+          "color": "blue"
+        },
+        {
+          "title": "Dockerfile 参考",
+          "url": "https://deepzz.com/post/dockerfile-reference.html",
+          "description": "指令与最佳实践",
+          "icon": "file-text",
+          "color": "sky"
+        },
+        {
+          "title": "Harbor",
+          "url": "https://goharbor.io/",
+          "description": "OCI 镜像仓库管理",
+          "icon": "archive",
+          "color": "blue"
+        },
+        {
+          "title": "DockerCompose 生成",
+          "url": "https://www.composerize.com/",
+          "description": "Run 转 Compose",
+          "icon": "repeat",
+          "color": "green"
+        },
+        {
+          "title": "K3s",
+          "url": "https://docs.k3s.io/zh/",
+          "description": "轻量级 K8s 文档",
+          "icon": "feather",
+          "color": "indigo"
+        },
+        {
+          "title": "Kind",
+          "url": "https://kind.sigs.k8s.io/",
+          "description": "容器内 K8s 集群",
+          "icon": "container",
+          "color": "teal"
+        },
+        {
+          "title": "K8s API",
+          "url": "https://kubernetes.io/docs/reference/kubernetes-api/",
+          "description": "Kubernetes API 参考",
+          "icon": "code",
+          "color": "blue"
+        },
+        {
+          "title": "Helm 文档",
+          "url": "https://helm.sh/",
+          "description": "Helm 官方文档",
+          "icon": "anchor",
+          "color": "zinc"
+        },
+        {
+          "title": "Registry Explorer",
+          "url": "https://explore.ggcr.dev/",
+          "description": "镜像仓库调试工具",
+          "icon": "scan",
+          "color": "teal"
+        },
+        {
+          "title": "渡渡鸟镜像",
+          "url": "https://docker.aityp.com/",
+          "description": "国内 Docker 镜像同步",
+          "icon": "cloud",
+          "color": "rose"
+        },
+        {
+          "title": "Argo CD",
+          "url": "https://argo-cd.readthedocs.io/",
+          "description": "GitOps 持续部署",
+          "icon": "git-merge",
+          "color": "red"
+        },
+        {
+          "title": "Argo Rollouts",
+          "url": "https://argo-rollouts.readthedocs.io/",
+          "description": "蓝绿/灰度发布控制器",
+          "icon": "shuffle",
+          "color": "orange"
+        }
+      ]
+    },
+    {
+      "id": "mirrors",
+      "name": "软件仓库",
+      "nameEn": "MIRRORS",
+      "icon": "hard-drive",
+      "iconClass": "text-indigo-500",
+      "hoverBorder": "hover:border-indigo-300",
+      "items": [
+        {
+          "title": "清华源",
+          "url": "https://mirrors.tuna.tsinghua.edu.cn/",
+          "description": "开源软件镜像站",
+          "icon": "building",
+          "color": "blue"
+        },
+        {
+          "title": "阿里源",
+          "url": "https://mirrors.aliyun.com/",
+          "description": "阿里云开源镜像站",
+          "icon": "cloud",
+          "color": "orange"
+        },
+        {
+          "title": "华为源",
+          "url": "https://mirrors.huaweicloud.com/",
+          "description": "华为云开源镜像站",
+          "icon": "cloud",
+          "color": "green"
+        },
+        {
+          "title": "Maven 中央仓库",
+          "url": "https://mvnrepository.com/",
+          "description": "Maven 依赖查询",
+          "icon": "package",
+          "color": "indigo"
+        },
+        {
+          "title": "Maven 阿里",
+          "url": "https://maven.aliyun.com/mvn/guide",
+          "description": "阿里 Maven 仓库指引",
+          "icon": "package",
+          "color": "amber"
+        },
+        {
+          "title": "NPM 淘宝源",
+          "url": "https://npmmirror.com/",
+          "description": "淘宝 NPM 镜像站",
+          "icon": "package",
+          "color": "cyan"
+        }
+      ]
+    },
+    {
+      "id": "online-tools",
+      "name": "在线工具",
+      "nameEn": "ONLINE TOOLS",
+      "icon": "wrench",
+      "iconClass": "text-emerald-500",
+      "hoverBorder": "hover:border-emerald-300",
+      "items": [
+        {
+          "title": "常用工具合集",
+          "url": "https://ctool.dev/",
+          "description": "在线工具集合 (ctool)",
+          "icon": "grid",
+          "color": "sky"
+        },
+        {
+          "title": "Crontab 生成",
+          "url": "https://crontab-generator.org/",
+          "description": "表达式可视化生成",
+          "icon": "clock",
+          "color": "green"
+        },
+        {
+          "title": "快速参考",
+          "url": "https://wangchujiang.com/reference/",
+          "description": "命令/语法速查参考",
+          "icon": "book",
+          "color": "amber"
+        },
+        {
+          "title": "IP 测试",
+          "url": "https://ping.sx/ping",
+          "description": "Ping/网络连通性",
+          "icon": "wifi",
+          "color": "indigo"
+        },
+        {
+          "title": "Excalidraw",
+          "url": "https://excalidraw.com/",
+          "description": "手绘风流程图工具",
+          "icon": "pencil",
+          "color": "pink"
+        },
+        {
+          "title": "Curl 转换",
+          "url": "https://curlconverter.com/",
+          "description": "Curl 转多语言代码",
+          "icon": "code",
+          "color": "orange"
+        },
+        {
+          "title": "临时邮箱 Plus",
+          "url": "https://tempmail.plus/zh/#!",
+          "description": "TempMailPlus",
+          "icon": "mail",
+          "color": "zinc"
+        },
+        {
+          "title": "临时邮箱 Once",
+          "url": "https://email-once.com/",
+          "description": "Email Once",
+          "icon": "mail",
+          "color": "green"
+        }
+      ]
+    },
+    {
+      "id": "downloads",
+      "name": "软件下载",
+      "nameEn": "DOWNLOADS",
+      "icon": "arrow-down-circle",
+      "iconClass": "text-orange-500",
+      "hoverBorder": "hover:border-orange-300",
+      "items": [
+        {
+          "title": "Jenkins Download",
+          "url": "https://get.jenkins.io/",
+          "description": "安装包与历史版本",
+          "icon": "hard-drive",
+          "color": "blue"
+        },
+        {
+          "title": "GitLab Packages",
+          "url": "https://packages.gitlab.com/gitlab/gitlab-ce",
+          "description": "GitLab 官方包下载",
+          "icon": "git-branch",
+          "color": "orange"
+        },
+        {
+          "title": "GitLab 清华",
+          "url": "https://mirrors.tuna.tsinghua.edu.cn/gitlab-ce/",
+          "description": "GitLab 软件包镜像",
+          "icon": "git-branch",
+          "color": "blue"
+        },
+        {
+          "title": "MySQL Download",
+          "url": "https://dev.mysql.com/downloads/mysql/",
+          "description": "MySQL Community Server 官方下载",
+          "icon": "database",
+          "color": "teal"
+        },
+        {
+          "title": "Redis Download",
+          "url": "https://redis.io/downloads/",
+          "description": "Redis 官方下载与发行版本",
+          "icon": "database",
+          "color": "red"
+        },
+        {
+          "title": "Kafka Download",
+          "url": "https://kafka.apache.org/downloads.html",
+          "description": "Apache Kafka 官方下载页面",
+          "icon": "message-square",
+          "color": "zinc"
+        },
+        {
+          "title": "SkyWalking Download",
+          "url": "https://skywalking.apache.org/downloads/",
+          "description": "Apache SkyWalking 官方下载页面",
+          "icon": "eye",
+          "color": "violet"
+        },
+        {
+          "title": "Docker Download",
+          "url": "https://www.docker.com/products/docker-desktop/",
+          "description": "Docker Desktop 官方下载入口",
+          "icon": "box",
+          "color": "blue"
+        },
+        {
+          "title": "OpenJDK 镜像",
+          "url": "https://adoptium.net/zh-CN/",
+          "description": "Adoptium 下载",
+          "icon": "coffee",
+          "color": "blue"
+        },
+        {
+          "title": "JDK 下载站",
+          "url": "https://www.injdk.cn/",
+          "description": "国内 JDK 聚合下载",
+          "icon": "download",
+          "color": "violet"
+        },
+        {
+          "title": "Adoptium 清华",
+          "url": "https://mirrors.tuna.tsinghua.edu.cn/Adoptium/",
+          "description": "清华 OpenJDK 镜像",
+          "icon": "download",
+          "color": "teal"
+        }
+      ]
+    },
+    {
+      "id": "dev",
+      "name": "硬核开发",
+      "nameEn": "DEVELOPMENT",
+      "icon": "code",
+      "iconClass": "text-blue-500",
+      "hoverBorder": "hover:border-blue-300",
+      "items": [
+        {
+          "title": "Stack Overflow",
+          "url": "https://stackoverflow.com",
+          "description": "开发者问答社区",
+          "icon": "layers",
+          "color": "orange"
+        },
+        {
+          "title": "MDN Web Docs",
+          "url": "https://developer.mozilla.org",
+          "description": "Web 技术权威文档",
+          "icon": "book-open",
+          "color": "blue"
+        },
+        {
+          "title": "npm",
+          "url": "https://npmjs.com",
+          "description": "Node.js 包管理器",
+          "icon": "package",
+          "color": "red"
+        },
+        {
+          "title": "Vercel",
+          "url": "https://vercel.com",
+          "description": "前端部署平台",
+          "icon": "triangle",
+          "color": "zinc"
+        }
+      ]
+    },
+    {
+      "id": "design",
+      "name": "视觉创意",
+      "nameEn": "DESIGN",
+      "icon": "brush",
+      "iconClass": "text-pink-500",
+      "hoverBorder": "hover:border-pink-300",
+      "items": [
+        {
+          "title": "Figma",
+          "url": "https://figma.com",
+          "description": "协作设计工具",
+          "icon": "pen-tool",
+          "color": "pink"
+        },
+        {
+          "title": "Dribbble",
+          "url": "https://dribbble.com",
+          "description": "设计师灵感社区",
+          "icon": "circle-dot",
+          "color": "pink"
+        },
+        {
+          "title": "Unsplash",
+          "url": "https://unsplash.com",
+          "description": "免费高质量图片库",
+          "icon": "image",
+          "color": "emerald"
+        }
+      ]
+    },
+    {
+      "id": "social",
+      "name": "社交通讯",
+      "nameEn": "SOCIAL",
+      "icon": "users",
+      "iconClass": "text-orange-500",
+      "hoverBorder": "hover:border-orange-300",
+      "items": [
+        {
+          "title": "X (Twitter)",
+          "url": "https://twitter.com",
+          "description": "全球社交媒体平台",
+          "icon": "at-sign",
+          "color": "sky"
+        },
+        {
+          "title": "Discord",
+          "url": "https://discord.com",
+          "description": "开发者社区聊天",
+          "icon": "headphones",
+          "color": "indigo"
+        },
+        {
+          "title": "Telegram",
+          "url": "https://telegram.org",
+          "description": "加密即时通讯",
+          "icon": "send",
+          "color": "sky"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2306b6d4'/%3E%3Cstop offset='100%25' stop-color='%2310b981'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='24' fill='url(%23g)'/%3E%3Cpath d='M30 50h40M50 30v40' stroke='white' stroke-width='10' stroke-linecap='round'/%3E%3C/svg%3E">
+    <title>云端拾光 - 个人导航</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        html, body {
+            background-color: #fafafa;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            height: 100%;
+        }
+        .smooth-scroll {
+            scroll-behavior: smooth;
+        }
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e4e4e7;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #cbd5e1;
+        }
+        /* 卡片按压缩放效果 */
+        .card-press {
+            transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+        }
+        .card-press:active {
+            transform: scale(0.98);
+        }
+        /* 侧边栏移动端动画 */
+        .sidebar-overlay {
+            transition: opacity 0.2s ease;
+        }
+        .sidebar-mobile {
+            transition: transform 0.25s ease;
+        }
+        /* 搜索框聚焦动画 */
+        .search-input {
+            transition: width 0.25s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+        }
+        .search-input:focus {
+            box-shadow: 0 0 0 3px rgba(24, 24, 27, 0.08);
+        }
+        /* 分类标签颜色系统 */
+        .cat-common { --cat-color: #f59e0b; --cat-bg: #fffbeb; --cat-border: #fde68a; }
+        .cat-ai { --cat-color: #8b5cf6; --cat-bg: #f5f3ff; --cat-border: #ddd6fe; }
+        .cat-dev { --cat-color: #3b82f6; --cat-bg: #eff6ff; --cat-border: #bfdbfe; }
+        .cat-design { --cat-color: #ec4899; --cat-bg: #fdf2f8; --cat-border: #fbcfe8; }
+        .cat-tools { --cat-color: #10b981; --cat-bg: #ecfdf5; --cat-border: #a7f3d0; }
+        .cat-social { --cat-color: #f97316; --cat-bg: #fff7ed; --cat-border: #fed7aa; }
+        /* 导航激活状态 */
+        .nav-active {
+            background-color: #f4f4f5;
+            color: #18181b;
+            font-weight: 600;
+        }
+        .nav-active .nav-icon {
+            opacity: 1;
+        }
+        /* prefers-reduced-motion */
+        @media (prefers-reduced-motion: reduce) {
+            .card-press, .search-input, .sidebar-overlay, .sidebar-mobile {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+<body class="text-zinc-800 bg-[#fafafa] antialiased tracking-tight flex flex-col overflow-hidden">
+
+    <!-- Header -->
+    <header class="w-full border-b border-zinc-200/80 bg-[#fafafa]/80 backdrop-blur-md h-14 shrink-0 px-4 md:px-6 flex items-center justify-between z-50">
+        <div class="flex items-center gap-2.5 font-bold text-zinc-900 text-sm">
+            <!-- 移动端菜单按钮 -->
+            <button id="menu-toggle" class="md:hidden w-8 h-8 flex items-center justify-center rounded-lg hover:bg-zinc-100 transition" aria-label="打开侧边导航">
+                <i data-lucide="menu" class="w-4 h-4"></i>
+            </button>
+            <svg viewBox="0 0 100 100" class="w-6 h-6">
+                <defs>
+                    <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#06b6d4"/>
+                        <stop offset="100%" stop-color="#10b981"/>
+                    </linearGradient>
+                </defs>
+                <rect width="100" height="100" rx="24" fill="url(#logo-grad)"/>
+                <path d="M30 50h40M50 30v40" stroke="white" stroke-width="10" stroke-linecap="round"/>
+            </svg>
+            <span class="hidden sm:inline">云端拾光</span>
+            <span class="sm:hidden">云端拾光</span>
+        </div>
+
+        <div class="flex items-center gap-3">
+            <div class="relative">
+                <label for="global-search" class="sr-only">全局搜索</label>
+                <span class="absolute inset-y-0 left-2.5 flex items-center text-zinc-400 pointer-events-none">
+                    <i data-lucide="search" class="w-3.5 h-3.5"></i>
+                </span>
+                <input id="global-search" type="text" placeholder="搜索... 按 / 唤醒" class="search-input w-40 sm:w-52 md:w-60 pl-8 pr-3 py-1.5 bg-white border border-zinc-200 rounded-lg text-xs focus:outline-none focus:border-zinc-900 md:focus:w-80" aria-label="全局搜索导航卡片">
+            </div>
+        </div>
+    </header>
+
+    <div class="flex-1 flex min-h-0 w-full relative">
+
+        <!-- 移动端遮罩层 -->
+        <div id="sidebar-overlay" class="sidebar-overlay fixed inset-0 bg-black/30 z-40 md:hidden hidden opacity-0" aria-hidden="true"></div>
+
+        <!-- 侧边栏 -->
+        <aside id="sidebar" class="sidebar-mobile fixed md:static inset-y-0 left-0 w-56 md:w-48 shrink-0 bg-white border-r border-zinc-200/60 p-4 overflow-y-auto z-50 -translate-x-full md:translate-x-0">
+            <nav id="sidebar-nav" class="space-y-1 text-xs font-medium text-zinc-500" role="navigation" aria-label="分类导航">
+                <div class="px-2 py-1 text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-1">云端驿站</div>
+                <!-- 动态生成 -->
+            </nav>
+        </aside>
+
+        <!-- 主内容区 -->
+        <main id="main-content" class="flex-1 min-w-0 p-4 md:p-6 overflow-y-auto smooth-scroll space-y-8 bg-[#fafafa]">
+            <!-- 动态生成 -->
+        </main>
+    </div>
+
+    <script>
+        // 颜色映射
+        const colorMap = {
+            zinc: { bg: 'bg-zinc-50', border: 'border-zinc-100', text: 'text-zinc-600', hover: 'hover:border-zinc-400', hoverBg: 'group-hover:bg-zinc-900', hoverBorder: 'group-hover:border-zinc-900' },
+            red: { bg: 'bg-red-50', border: 'border-red-100', text: 'text-red-600', hover: 'hover:border-red-300', hoverBg: 'group-hover:bg-red-600', hoverBorder: 'group-hover:border-red-600' },
+            orange: { bg: 'bg-orange-50', border: 'border-orange-100', text: 'text-orange-600', hover: 'hover:border-orange-300', hoverBg: 'group-hover:bg-orange-600', hoverBorder: 'group-hover:border-orange-600' },
+            amber: { bg: 'bg-amber-50', border: 'border-amber-100', text: 'text-amber-600', hover: 'hover:border-amber-300', hoverBg: 'group-hover:bg-amber-600', hoverBorder: 'group-hover:border-amber-600' },
+            yellow: { bg: 'bg-yellow-50', border: 'border-yellow-100', text: 'text-yellow-600', hover: 'hover:border-yellow-300', hoverBg: 'group-hover:bg-yellow-600', hoverBorder: 'group-hover:border-yellow-600' },
+            lime: { bg: 'bg-lime-50', border: 'border-lime-100', text: 'text-lime-600', hover: 'hover:border-lime-300', hoverBg: 'group-hover:bg-lime-600', hoverBorder: 'group-hover:border-lime-600' },
+            green: { bg: 'bg-green-50', border: 'border-green-100', text: 'text-green-600', hover: 'hover:border-green-300', hoverBg: 'group-hover:bg-green-600', hoverBorder: 'group-hover:border-green-600' },
+            emerald: { bg: 'bg-emerald-50', border: 'border-emerald-100', text: 'text-emerald-600', hover: 'hover:border-emerald-300', hoverBg: 'group-hover:bg-emerald-600', hoverBorder: 'group-hover:border-emerald-600' },
+            teal: { bg: 'bg-teal-50', border: 'border-teal-100', text: 'text-teal-600', hover: 'hover:border-teal-300', hoverBg: 'group-hover:bg-teal-600', hoverBorder: 'group-hover:border-teal-600' },
+            cyan: { bg: 'bg-cyan-50', border: 'border-cyan-100', text: 'text-cyan-600', hover: 'hover:border-cyan-300', hoverBg: 'group-hover:bg-cyan-600', hoverBorder: 'group-hover:border-cyan-600' },
+            sky: { bg: 'bg-sky-50', border: 'border-sky-100', text: 'text-sky-600', hover: 'hover:border-sky-300', hoverBg: 'group-hover:bg-sky-600', hoverBorder: 'group-hover:border-sky-600' },
+            blue: { bg: 'bg-blue-50', border: 'border-blue-100', text: 'text-blue-600', hover: 'hover:border-blue-300', hoverBg: 'group-hover:bg-blue-600', hoverBorder: 'group-hover:border-blue-600' },
+            indigo: { bg: 'bg-indigo-50', border: 'border-indigo-100', text: 'text-indigo-600', hover: 'hover:border-indigo-300', hoverBg: 'group-hover:bg-indigo-600', hoverBorder: 'group-hover:border-indigo-600' },
+            violet: { bg: 'bg-violet-50', border: 'border-violet-100', text: 'text-violet-600', hover: 'hover:border-violet-300', hoverBg: 'group-hover:bg-violet-600', hoverBorder: 'group-hover:border-violet-600' },
+            purple: { bg: 'bg-purple-50', border: 'border-purple-100', text: 'text-purple-600', hover: 'hover:border-purple-300', hoverBg: 'group-hover:bg-purple-600', hoverBorder: 'group-hover:border-purple-600' },
+            fuchsia: { bg: 'bg-fuchsia-50', border: 'border-fuchsia-100', text: 'text-fuchsia-600', hover: 'hover:border-fuchsia-300', hoverBg: 'group-hover:bg-fuchsia-600', hoverBorder: 'group-hover:border-fuchsia-600' },
+            pink: { bg: 'bg-pink-50', border: 'border-pink-100', text: 'text-pink-600', hover: 'hover:border-pink-300', hoverBg: 'group-hover:bg-pink-600', hoverBorder: 'group-hover:border-pink-600' },
+            rose: { bg: 'bg-rose-50', border: 'border-rose-100', text: 'text-rose-600', hover: 'hover:border-rose-300', hoverBg: 'group-hover:bg-rose-600', hoverBorder: 'group-hover:border-rose-600' }
+        };
+
+        // 生成侧边栏导航项
+        function renderSidebarNav(categories) {
+            const nav = document.getElementById('sidebar-nav');
+            const firstCategory = categories[0];
+
+            categories.forEach((cat, index) => {
+                const link = document.createElement('a');
+                link.href = `#cat-${cat.id}`;
+                link.className = `nav-link flex items-center gap-2 px-2.5 py-2 rounded-lg transition hover:bg-zinc-50 ${index === 0 ? 'nav-active' : 'hover:text-zinc-900'}`;
+                link.dataset.cat = cat.id;
+                link.innerHTML = `<i data-lucide="${cat.icon}" class="nav-icon w-3.5 h-3.5 ${cat.iconClass}"></i><span>${cat.name}</span>`;
+                nav.appendChild(link);
+            });
+        }
+
+        // 生成卡片 HTML
+        function createCardHTML(item, hoverBorderClass) {
+            const colors = colorMap[item.color] || colorMap.zinc;
+
+            // 生成图标内容
+            let iconContent = '';
+            if (item.initial) {
+                iconContent = `<span class="font-bold text-xs">${item.initial}</span>`;
+            } else if (item.svg) {
+                iconContent = item.svg;
+            } else {
+                iconContent = `<i data-lucide="${item.icon || 'globe'}" class="w-4 h-4"></i>`;
+            }
+
+            // 生成图标容器样式
+            let iconContainerClass = '';
+            if (item.initial) {
+                iconContainerClass = `w-9 h-9 ${item.initialBg || 'bg-zinc-900'} rounded-lg flex items-center justify-center ${item.initialText || 'text-white'} shrink-0 group-hover:scale-105 transition`;
+            } else {
+                iconContainerClass = `w-9 h-9 ${colors.bg} border ${colors.border} rounded-lg flex items-center justify-center ${colors.text} shrink-0 ${colors.hoverBg} group-hover:text-white ${colors.hoverBorder} transition`;
+            }
+
+            return `
+                <a href="${item.url}" target="_blank" rel="noopener noreferrer"
+                   class="card-press bg-white border border-zinc-200/80 rounded-xl p-3 flex items-center gap-3 ${hoverBorderClass} hover:shadow-md transition group cursor-pointer"
+                   aria-label="访问 ${item.title}">
+                    <div class="${iconContainerClass}">
+                        ${iconContent}
+                    </div>
+                    <div class="min-w-0 flex-1">
+                        <h3 class="text-xs font-bold text-zinc-900 truncate">${item.title}</h3>
+                        <p class="text-[10px] ${colors.text} font-medium truncate mt-0.5">${item.description}</p>
+                    </div>
+                    <i data-lucide="external-link" class="w-3 h-3 text-zinc-300 opacity-0 group-hover:opacity-100 transition shrink-0"></i>
+                </a>`;
+        }
+
+        // 生成分类区块
+        function renderCategorySection(cat) {
+            const section = document.createElement('section');
+            section.id = `cat-${cat.id}`;
+            section.className = `scroll-mt-6 space-y-3 cat-${cat.id}`;
+
+            const itemsHTML = cat.items.map(item => createCardHTML(item, cat.hoverBorder)).join('');
+
+            section.innerHTML = `
+                <div class="flex items-center gap-2 border-b border-zinc-200/60 pb-1.5">
+                    <i data-lucide="${cat.icon}" class="w-4 h-4 ${cat.iconClass}"></i>
+                    <h2 class="text-xs font-bold text-zinc-400 uppercase tracking-widest">${cat.name} // ${cat.nameEn}</h2>
+                    <span class="ml-auto text-[10px] text-zinc-400 bg-zinc-100 px-2 py-0.5 rounded-full">${cat.items.length} 项</span>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-3">
+                    ${itemsHTML}
+                </div>`;
+
+            return section;
+        }
+
+        // 加载配置并渲染
+        async function loadAndRender() {
+            try {
+                const response = await fetch('./nav-config.json');
+                const config = await response.json();
+
+                // 渲染侧边栏
+                renderSidebarNav(config.categories);
+
+                // 渲染主内容区
+                const mainContent = document.getElementById('main-content');
+                config.categories.forEach(cat => {
+                    mainContent.appendChild(renderCategorySection(cat));
+                });
+
+                // 底部留白
+                const spacer = document.createElement('div');
+                spacer.className = 'h-8';
+                mainContent.appendChild(spacer);
+
+                // 初始化图标
+                lucide.createIcons();
+
+                // 初始化交互
+                initInteractions();
+
+            } catch (error) {
+                console.error('加载配置文件失败:', error);
+                document.getElementById('main-content').innerHTML = `
+                    <div class="flex items-center justify-center h-full">
+                        <div class="text-center">
+                            <i data-lucide="alert-circle" class="w-12 h-12 text-red-400 mx-auto mb-4"></i>
+                            <p class="text-zinc-600 font-medium">加载配置文件失败</p>
+                            <p class="text-zinc-400 text-sm mt-1">请确保 nav-config.json 文件存在</p>
+                        </div>
+                    </div>`;
+                lucide.createIcons();
+            }
+        }
+
+        // 初始化交互功能
+        function initInteractions() {
+            // 移动端侧边栏控制
+            const menuToggle = document.getElementById('menu-toggle');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+
+            function openSidebar() {
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+                requestAnimationFrame(() => {
+                    overlay.classList.add('opacity-100');
+                });
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeSidebar() {
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.remove('opacity-100');
+                setTimeout(() => {
+                    overlay.classList.add('hidden');
+                }, 200);
+                document.body.style.overflow = '';
+            }
+
+            menuToggle.addEventListener('click', openSidebar);
+            overlay.addEventListener('click', closeSidebar);
+
+            // 侧边栏导航高亮
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('section[id^="cat-"]');
+
+            function updateActiveNav() {
+                const scrollPos = document.getElementById('main-content').scrollTop + 100;
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.offsetHeight;
+                    const sectionId = section.id.replace('cat-', '');
+
+                    if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('nav-active');
+                            if (link.dataset.cat === sectionId) {
+                                link.classList.add('nav-active');
+                            }
+                        });
+                    }
+                });
+            }
+
+            document.getElementById('main-content').addEventListener('scroll', updateActiveNav);
+
+            // 点击导航链接关闭移动端侧边栏
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth < 768) {
+                        closeSidebar();
+                    }
+                });
+            });
+
+            // 搜索过滤功能
+            const searchInput = document.getElementById('global-search');
+            const allCards = document.querySelectorAll('a[href^="http"]');
+
+            searchInput.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase().trim();
+
+                allCards.forEach(card => {
+                    const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
+                    const desc = card.querySelector('p')?.textContent.toLowerCase() || '';
+                    const matches = !query || title.includes(query) || desc.includes(query);
+                    card.style.display = matches ? '' : 'none';
+                });
+            });
+
+            // 键盘快捷键
+            document.addEventListener('keydown', (e) => {
+                if (e.key === '/' && document.activeElement !== searchInput) {
+                    e.preventDefault();
+                    searchInput.focus();
+                }
+                if (e.key === 'Escape') {
+                    searchInput.blur();
+                    searchInput.value = '';
+                    allCards.forEach(card => card.style.display = '');
+                }
+            });
+        }
+
+        // 启动
+        loadAndRender();
+    </script>
+</body>
+</html>
